@@ -1,60 +1,62 @@
-# Ex.No:3(F) WRAPPER CLASS
+# Ex.No:5(A) INPUTSTREAMREADER 
 
 ## QUESTION:
-Write a Java program to convert a string to an integer using a wrapper class and perform addition.
+Write a program to demonstrate chaining of streams (BufferedReader on top of InputStreamReader on top of System.in)
 
 ## AIM:
-To convert string inputs into integers using the wrapper class and perform addition.
+
+To write a Java program to demonstrate chaining of streams using BufferedReader on top of InputStreamReader on top of System.in for reading user input.
 
 ## ALGORITHM :
 
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Add the two integers.
-4.	Display the sum.
+1. Start the program. 
+
+2. Create a BufferedReader object using InputStreamReader(System.in).
+  
+3. Read the user’s name using readLine() 
+
+4. Read the user’s age using readLine() and convert it to integer using Integer.parseInt().
+
+5.  Display the entered user details.
+
+6.   Stop the program. 
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Wrapper Class using Java
+Program to implement a InputStreamReader using Java
 Developed by: Hezron Belix
 RegisterNumber: 212223230078
 */
 ```
 
 ## SOURCE CODE:
-```java
-import java.util.Scanner;
+
+```
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        String str1 = scanner.next();
+        BufferedReader br = new BufferedReader(
+                                new InputStreamReader(System.in));
 
-        String str2 = scanner.next();
+        String name = br.readLine();
+        int age = Integer.parseInt(br.readLine());
 
-        scanner.close();
-
-        try {
-            int num1 = Integer.parseInt(str1);
-            int num2 = Integer.parseInt(str2);
-
-
-            int sum = num1 + num2;
-            System.out.println("Sum = " + sum);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
-        }
+        System.out.println("--- User Details ---");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
     }
 }
 ```
 
 
 ## OUTPUT:
-
-<img width="1223" height="414" alt="image" src="https://github.com/user-attachments/assets/e11dbc1a-45c7-4d20-9895-e2a3432588c0" />
+<img width="481" height="382" alt="image" src="https://github.com/user-attachments/assets/2a54383a-5d16-483f-8349-d1a1777df567" />
 
 ## RESULT:
-The program successfully converts strings to integers and displays their sum.
+The program successfully demonstrates chaining of streams in Java using BufferedReader, InputStreamReader, and System.in to read input from the user and display the entered details.

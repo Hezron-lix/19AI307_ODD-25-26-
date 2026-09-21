@@ -1,4 +1,4 @@
-# Ex.No:5(E) MULTITHREADING -SYNCHRONIZATION
+# Ex.No:4(D) DESIGN PATTERN  ---- BEHAVIOUR PATTERN
 
 ## QUESTION:
 
@@ -18,7 +18,7 @@
 ## PROGRAM:
  ```
 /*
-Program to implement a Synchronization concept using Java
+Program to implement a Behaviour Pattern using Java
 Developed by: 
 RegisterNumber:  
 */

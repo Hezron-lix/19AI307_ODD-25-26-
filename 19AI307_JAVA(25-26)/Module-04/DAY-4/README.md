@@ -1,36 +1,33 @@
-# Ex.No:5(D) THREAD PRIORITY
+# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
 
 ## QUESTION:
-Write a java program for determine the priority and name of the current thread.
+You are asked to simulate a simple Shape Drawing Tool using the Factory Design Pattern in Java.
+
+You will implement a Shape interface with concrete classes for different shapes (Circle, Square, Rectangle). Using a ShapeFactory, your program will take shape names from user input and draw them accordingly. If the shape is unknown, print an error message.
 
 ## AIM:
-To write a Java program to determine and display the name and priority of the current thread.
+To implement the Factory Design Pattern in Java to create and draw different shapes like Circle, Square, and Rectangle based on user input.
 
 ## ALGORITHM :
+1. Start the program and create a ShapeFactory object.
 
-1.	Start the program.
+2. Read shape name input from the user in a loop.
 
-2. Import required classes (Scanner).
+3. If input is "exit", stop the program.
 
-3. Read thread name from the user.
+4. Pass input to ShapeFactory to create the required shape object.
 
-4. Get the current thread using Thread.currentThread().
+5. If shape is valid, call the draw() method; otherwise print an error message.
 
-5. Set the thread name using setName().
+6. Repeat steps 2–5 until exit.
 
-6. Retrieve and display thread priority using getPriority().
-
-7. Retrieve and display thread name using getName().
-
-8. Print the thread object details.
-
-9. End the program.
+7. End the program.
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Thread Priority Concept using Java
+Program to implement a Abstract Factory Pattern using Java
 Developed by: Hezron Belix
 RegisterNumber: 212223230078
 */
@@ -38,20 +35,76 @@ RegisterNumber: 212223230078
 
 ## SOURCE CODE:
 ```
-import java.util.Scanner;
+import java.util.*;
+
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+
+    public void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+class Square implements Shape {
+
+    public void draw() {
+        System.out.println("Drawing Square");
+    }
+}
+
+class Rectangle implements Shape {
+
+    public void draw() {
+        System.out.println("Drawing Rectangle");
+    }
+}
+
+class ShapeFactory {
+
+    public Shape getShape(String shapeType) {
+
+        if (shapeType.equalsIgnoreCase("circle")) {
+            return new Circle();
+        }
+        else if (shapeType.equalsIgnoreCase("square")) {
+            return new Square();
+        }
+        else if (shapeType.equalsIgnoreCase("rectangle")) {
+            return new Rectangle();
+        }
+
+        return null;
+    }
+}
 
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        String threadName = sc.nextLine();
+        ShapeFactory factory = new ShapeFactory();
 
-        Thread t = Thread.currentThread();
-        t.setName(threadName);
+        while (true) {
 
-        System.out.println("Priority of Thread: " + t.getPriority());
-        System.out.println("Name of Thread: " + t.getName());
-        System.out.println(t);
+            String input = sc.nextLine();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            Shape shape = factory.getShape(input);
+
+            if (shape != null) {
+                shape.draw();
+            }
+            else {
+                System.out.println("Invalid shape: " + input);
+            }
+        }
 
         sc.close();
     }
@@ -60,8 +113,8 @@ public class Main {
 
 
 ## OUTPUT:
-<img width="564" height="178" alt="image" src="https://github.com/user-attachments/assets/149ba57b-db7e-4982-966b-ceb434297053" />
 
+<img width="509" height="374" alt="image" src="https://github.com/user-attachments/assets/d39a2b9d-5292-45ca-9ce3-9ce109940071" />
 
 ## RESULT:
-The Java program successfully determines and displays the current thread’s name and priority using the Thread class.
+Thus, the program to implement the Factory Design Pattern for creating and drawing different shapes (Circle, Square, Rectangle) based on user input was successfully executed and the output was obtained.

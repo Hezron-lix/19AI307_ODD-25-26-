@@ -1,34 +1,32 @@
-# Ex.No:5(C)  FILE HANDLING USING JAVA
+# Ex.No:4(C)  COMPOSITION IN JAVA
+
 ## QUESTION:
-Write a program to overwrite the content of a file.
+Implement a system where a Library contains multiple Book objects. Each Book is created inside the Library. Books can't exist independently (Composition).
 
 ## AIM:
-
-To write a Java program to overwrite the content of a file using FileWriter.
+To implement a Composition relationship in Java where a Library contains multiple Book objects, and each Book is created inside the Library, meaning Books cannot exist independently.
 
 ## ALGORITHM :
 
-1.	Start the program.
+1. Start the program.
 
-2. Import required classes (FileWriter, Scanner).
+2. Create a Library object.
 
-3. Take input content from the user.
+3. Read number of books n.
 
-4. Create a FileWriter object for the file (output.txt).
+4. Read title and author for each book.
 
-5. Write the input content into the file (overwrite mode).
+5. Create Book objects inside Library and add them to a list.
 
-6. Close the file writer.
+6. Display all books in the Library.
 
-7. Display success message.
-
-8. End the program.
+7. End the program.
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a File Handling using Java
+Program to implement a Composition Concepts in Java
 Developed by: Hezron Belix
 RegisterNumber: 212223230078
 */
@@ -37,36 +35,73 @@ RegisterNumber: 212223230078
 ## SOURCE CODE:
 
 ```
-import java.io.FileWriter;
-import java.util.Scanner;
+import java.util.*;
 
-public class Main {
+public class CompositionExample {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
-        String content = sc.nextLine();
+        Library library = new Library();
 
-        try {
-            // Overwrite mode (default behavior)
-            FileWriter fw = new FileWriter("output.txt");
-            fw.write(content);
-            fw.close();
+        int n = sc.nextInt();
+        sc.nextLine();
 
-            System.out.println("File content overwritten successfully.");
-        } catch (Exception e) {
-            System.out.println("Error occurred while writing file.");
+        for (int i = 0; i < n; i++) {
+
+            String title = sc.nextLine();
+            String author = sc.nextLine();
+
+            library.addBook(title, author);
         }
+
+        library.showBooks();
 
         sc.close();
     }
 }
 
+class Book {
+
+    private String title;
+    private String author;
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    public String getDetails() {
+        return title + " by " + author;
+    }
+}
+
+class Library {
+
+    private List<Book> books = new ArrayList<>();
+
+    public void addBook(String title, String author) {
+
+        Book book = new Book(title, author);
+
+        books.add(book);
+    }
+
+    public void showBooks() {
+
+        System.out.println("Books in Library:");
+
+        for (Book book : books) {
+            System.out.println("- " + book.getDetails());
+        }
+    }
+}
 ```
 
 
 ## OUTPUT:
 
-<img width="894" height="173" alt="image" src="https://github.com/user-attachments/assets/9d1217cc-2a94-4479-8787-d3f4e0adc3d3" />
+<img width="746" height="414" alt="image" src="https://github.com/user-attachments/assets/0550a18a-be97-4a07-9062-58af95c60b84" />
 
 ## RESULT:
-The program successfully overwrites the existing content of a file named output.txt with new user-provided data using FileWriter.
+Thus the program to implement the composition was executed successfully.

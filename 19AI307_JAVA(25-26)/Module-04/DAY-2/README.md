@@ -1,117 +1,84 @@
-# Ex.No:5(B) SERIALIZATION AND DESERIALIZATION 
+# Ex.No:4(B)  IMPLEMENT SOLID PRINCIPLES IN JAVA PROGRAM 
 
 ## QUESTION:
-Write a Java program to serialize a collection of objects (like ArrayList<Student>) into a file.
+In a gaming lounge, there is only one master console power switch that controls all gaming consoles. Whenever a player turns on any console, it internally triggers the master power. The master switch must ensure only one instance is ever created, regardless of how many times it's accessed, to prevent power fluctuations.
+
+Every time a player accesses the master switch, it logs an access count. Since the switch is Singleton, the count should increment globally and reflect shared state.
 
 ## AIM:
-To write a Java program to serialize a collection of objects (ArrayList of Student) into a file and then deserialize the objects back from the file.
+To implement the Singleton design pattern in Java to ensure only a single instance of a MasterPowerSwitch class controls global access tracking across multiple players.
 
 ## ALGORITHM :
-1.	Start the program.
+1. Start the program and initialize a Scanner object to capture user inputs.
 
-2. Create a Student class that implements Serializable.
+2. Define a class MasterPowerSwitch with a private constructor to prevent direct outside instantiation.
 
-3. Create an ArrayList to store Student objects.
+3. Provide a static method getInstance() that instantiates the class only once and returns the shared instance.
 
-4. Read number of students from the user.
+4. Read the total number of players followed by each individual player's name using a loop structure.
 
-5. Input student details (id, name, marks) and store them in the list.
+5. Retrieve the single instance of the switch using MasterPowerSwitch.getInstance() and increment the global counter.
 
-6. Serialize the list using ObjectOutputStream into a file (students.dat).
-
-7. Deserialize the list using ObjectInputStream.
-
-8. Display the deserialized student objects.
-
-9. End the program.
+6. Print the player's name along with the globally shared access count and stop the program.
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Serialization and Deserialization using Java
+Program to implement a SOLID Principles in Java Program
 Developed by: Hezron Belix
-RegisterNumber: 21222330078
+RegisterNumber: 212223230078
 */
 ```
 
 ## SOURCE CODE:
 
 ```
-import java.io.*;
 import java.util.*;
 
-// Student class must implement Serializable
-class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
+class MasterPowerSwitch {
 
-    private int id;
-    private String name;
-    private double marks;
+    private static MasterPowerSwitch instance;
+    private int accessCount = 0;
 
-    public Student(int id, String name, double marks) {
-        this.id = id;
-        this.name = name;
-        this.marks = marks;
+    private MasterPowerSwitch() {
     }
 
-    @Override
-    public String toString() {
-        return "Student{id=" + id + ", name='" + name + "', marks=" + marks + "}";
+    public static MasterPowerSwitch getInstance() {
+        if (instance == null) {
+            instance = new MasterPowerSwitch();
+        }
+        return instance;
+    }
+
+    public int logAccess() {
+        accessCount++;
+        return accessCount;
     }
 }
 
-public class StudentSerializationUserInput {
-
-    public static void serializeStudents(List<Student> students, String fileName) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            oos.writeObject(students);
-            System.out.println("Students serialized successfully into: " + fileName);
-        } catch (IOException e) {
-            System.out.println("Error during serialization: " + e.getMessage());
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public static List<Student> deserializeStudents(String fileName) {
-        List<Student> students = null;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            students = (List<Student>) ois.readObject();
-            System.out.println("Students deserialized successfully from: " + fileName);
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error during deserialization: " + e.getMessage());
-        }
-        return students;
-    }
-
+public class prog {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        List<Student> students = new ArrayList<>();
 
-        int n = scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        sc.nextLine();
 
         for (int i = 0; i < n; i++) {
-            int id = scanner.nextInt();
-            String name = scanner.next();
-            double marks = scanner.nextDouble();
 
-            students.add(new Student(id, name, marks));
+            String player = sc.nextLine();
+
+            MasterPowerSwitch power = MasterPowerSwitch.getInstance();
+
+            int count = power.logAccess();
+
+            System.out.println(player + 
+                " accessed Master Power Switch. Total accesses so far: " 
+                + count);
         }
 
-        String fileName = "students.dat";
-
-        serializeStudents(students, fileName);
-
-        List<Student> deserializedStudents = deserializeStudents(fileName);
-
-        if (deserializedStudents != null) {
-            System.out.println("\nDeserialized Students:");
-            for (Student s : deserializedStudents) {
-                System.out.println(s);
-            }
-        }
-
-        scanner.close();
+        sc.close();
     }
 }
 ```
@@ -119,7 +86,7 @@ public class StudentSerializationUserInput {
 
 ## OUTPUT:
 
-<img width="941" height="352" alt="image" src="https://github.com/user-attachments/assets/f28a66bf-3b61-4ab7-bb9e-15096dc4d9d3" />
+<img width="943" height="192" alt="image" src="https://github.com/user-attachments/assets/d4007cee-6de8-4f2e-a480-a5e48c3ea95e" />
 
 ## RESULT:
-The Java program successfully serializes an ArrayList of Student objects into a file named students.dat and then deserializes the objects back, displaying the stored student details.
+Thus the program to implement SDP was executed successfully.
